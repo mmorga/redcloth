@@ -7,7 +7,7 @@ Object.send(:remove_const, :RedCloth) if Object.const_defined?(:RedCloth) && Red
 
 require 'rbconfig'
 begin
-  prefix = Config::CONFIG['arch'] =~ /mswin|mingw/ ? "#{Config::CONFIG['MAJOR']}.#{Config::CONFIG['MINOR']}/" : ''
+  prefix = RbConfig::CONFIG['arch'] =~ /mswin|mingw/ ? "#{RbConfig::CONFIG['MAJOR']}.#{RbConfig::CONFIG['MINOR']}/" : ''
   lib = "#{prefix}redcloth_scan"
   require lib
 rescue LoadError => e
@@ -22,18 +22,18 @@ require 'redcloth/formatters/html'
 require 'redcloth/formatters/latex'
 
 module RedCloth
-  
+
   # A convenience method for creating a new TextileDoc. See
   # RedCloth::TextileDoc.
   def self.new( *args, &block )
     RedCloth::TextileDoc.new( *args, &block )
   end
-  
+
   # Include extension modules (if any) in TextileDoc.
   def self.include(*args)
     RedCloth::TextileDoc.send(:include, *args)
   end
-  
+
 end
 
 begin
